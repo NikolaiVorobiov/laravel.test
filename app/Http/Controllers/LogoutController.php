@@ -11,11 +11,13 @@ class LogoutController extends Controller
     public function exit1(Request $request)
     {
 //        if (isset($_SESSION['admin'])) {
+
         if ($request->session()->get('admin') !== null) {
 
 //            unset($_SESSION['admin']);
+
             $request->session()->forget('admin');
         }
-        return redirect()->route('sign-in');
+        return redirect()->route('home');
     }
 }
