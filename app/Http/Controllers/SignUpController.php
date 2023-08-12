@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-session_start();
+//session_start();
 
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,7 +14,7 @@ class SignUpController extends Controller
     {
         $info = '';
 
-        if (isset($_SESSION['admin']) && $_SESSION['admin']) {
+        if ($request->session()->get('admin') !== null && $request->session()->get('admin')) {
             return view('admin');
         }
 //
@@ -41,8 +41,11 @@ class SignUpController extends Controller
                 'last_name.required' => 'Введите вашу фамилию',
             ]);
 
-            $_SESSION['admin'] = true;
-            dump($_SESSION);
+//            $_SESSION['admin'] = true;
+
+            $request->session()->put('admin', true);
+
+//            dump($_SESSION);
 //            dump($validated);
 
 
