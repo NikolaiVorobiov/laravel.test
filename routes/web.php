@@ -1,9 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\LogoutController;
-use App\Http\Controllers\SignInController;
-use App\Http\Controllers\SignUpController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,13 +23,17 @@ Route::get('/home', function () {
     return view('home');
 })->name('home');;
 
-Route::get('/sign-up', [SignUpController::class, 'form'])->name('sign-up');
+Route::group(['middleware' => ['check.auth']],  function () {
+    Route::get('/sign-up', [AuthController::class, 'registerForm'])->name('register.form');
+    Route::post('/sign-up', [AuthController::class, 'registerSave'])->name('register.save');
+    Route::get('/sign-in', [AuthController::class, 'loginForm'])->name('login.form');
+    Route::post('/sign-in', [AuthController::class, 'loginSave'])->name('login.save');
+});
 
-Route::get('/sign-in', [SignInController::class, 'entrance'])->name('sign-in');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/admin', [AdminController::class, 'show'])->name('admin');
 
-Route::get('/logout', [LogoutController::class, 'exit1'])->name('logout');
 
 Route::get('/products', function () {
     return view('products');
