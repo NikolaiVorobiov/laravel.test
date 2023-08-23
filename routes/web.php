@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,7 +35,9 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/admin', [AdminController::class, 'show'])->name('admin');
 
-
 Route::get('/products', function () {
     return view('products');
 });
+
+Route::get('/auth/google', [LoginController::class, 'redirectToGoogle']);
+Route::get('/auth/google/callback', [LoginController::class, 'handleGoogleCallback']);

@@ -17,6 +17,7 @@
 
     <form method="post" action="{{ route('login.form') }}">
         @csrf
+
         <div class="mb-3">
             <label for="email" class="form-label">Email address</label>
             <input value="{{ old('email') }}" type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp">
@@ -28,5 +29,15 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
+
+        <hr>
+
+        <div style="width: 30px; height: 30px">
+            <a href="{{ url('auth/google') }}" class="google-btn">
+                <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+                <span style="color: black;">Login with Google</span>
+            </a>
+        </div>
     </form>
+
 </x-layout>
