@@ -12,7 +12,7 @@
         </div>
     @endif
 
-    <p>{{ $info }}</p>
+    <p style="color: red;">{{ $info }}</p>
 
     <form method="post" action="{{ route('product.form.save') }}" enctype="multipart/form-data">
         @csrf
@@ -24,7 +24,7 @@
 
         <div class="mb-3">
             <label for="brand" class="form-label">Brand</label>
-            <input value="{{ old('brand') }}" type="text" name="brand" class="form-control" id="brand" >
+            <input value="{{ old('brand'}}" type="text" name="brand" class="form-control" id="brand" >
         </div>
 
         <div class="mb-3">

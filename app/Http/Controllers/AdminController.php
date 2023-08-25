@@ -17,6 +17,7 @@ class AdminController extends Controller
         $validated = $request->validate([
             'name' => 'required|unique:products|max:255',
             'brand' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'price' => 'required',
             'currency' => 'required'
         ], [
@@ -35,6 +36,12 @@ class AdminController extends Controller
         $product->price = $validated['price'];
         $product->currency = $validated['currency'];
         $product->status = $request->input('status') ? 1 : 0;
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images/products', 'public'); // сохранение изображения
+            $product->image = $imagePath;
+        }
+
         $product->save();
         $info = 'Сохранено';
 

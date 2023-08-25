@@ -20,13 +20,12 @@
                 <td>{{ $product->id }}</td>
                 <td>{{ $product->name }}</td>
                 <td>{{ $product->brand }}</td>
-                <td>{{ $product->image }}</td>
+                <td><img src="{{ asset('storage/' . $product->image) }}" alt="Изображение" width="30" height="30"></td>
                 <td>{{ $product->price }}</td>
                 <td>{{ $product->currency }}</td>
                 <td>{{ $product->status }}</td>
                 <td>{{ $product->created_at }}</td>
                 <td>{{ $product->updated_at }}</td>
-
             </tr>
         @endforeach
 
