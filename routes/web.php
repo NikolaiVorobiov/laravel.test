@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,11 +34,10 @@ Route::group(['middleware' => ['check.auth']],  function () {
 
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/admin', [AdminController::class, 'show'])->name('admin');
-
-Route::get('/products', function () {
-    return view('products');
-});
-
 Route::get('/auth/google', [LoginController::class, 'redirectToGoogle']);
 Route::get('/auth/google/callback', [LoginController::class, 'handleGoogleCallback']);
+
+Route::get('/admin', [AdminController::class, 'productFormShow'])->name('product.form.show');
+Route::post('/admin', [AdminController::class, 'productFormSave'])->name('product.form.save');
+
+Route::get('/products', [ProductController::class, 'show'])->name('products');
