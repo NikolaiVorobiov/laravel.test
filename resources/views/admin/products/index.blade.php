@@ -1,7 +1,7 @@
 <x-layout>
     <x-slot:title>Products</x-slot:title>
     <h1>Products</h1>
-    <a class="nav-link" href="/admin/products/create" style="display: block; text-align: right; margin-right: 90px; color: blue;">Add product</a>
+    <a class="nav-link" href="/admin/products/create" style="display: block; color: blue;">Add product</a>
 
     @if(session('info'))
         <p style="color: red;">{{ session('info') }}</p>

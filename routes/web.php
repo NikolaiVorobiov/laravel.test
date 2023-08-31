@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminProductController;
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,9 +22,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', function () {
-    return view('home');
-})->name('home');;
+Route::get('/home', [HomeController::class, 'index'])->name('home');;
 
 Route::group(['middleware' => ['check.auth']],  function () {
     Route::get('/sign-up', [AuthController::class, 'registerForm'])->name('register.form');
@@ -38,9 +38,12 @@ Route::get('/auth/google/callback', [LoginController::class, 'handleGoogleCallba
 
 
 Route::group(['prefix' => '/admin'], function () {
+
     Route::get('/', function () {
         return view('admin.admin');
     });
+    Route::get('/brands',  [BrandController::class, 'index'])->name('admin.brands.index');
+
     Route::group(['prefix' => '/products'], function () {
         Route::get('/', [AdminProductController::class, 'index'])->name('admin.products.index');
 
