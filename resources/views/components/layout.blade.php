@@ -15,29 +15,40 @@
     <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
                 <li class="nav-item">
                     <a class="nav-link " href="/home">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/products">Products</a>
-                </li>
 
                 @if( session('admin') !== null &&  session('admin') == true)
+
                     <li class="nav-item">
                         <a class="nav-link" href="/admin">Admin</a>
                     </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/products">Products</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/brands">Brands</a>
+                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="/logout">Logout</a>
                     </li>
+
                 @elseif(session('admin') == null)
+
                     <li class="nav-item">
                         <a class="nav-link" href="/sign-up">Sign-up</a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="/sign-in">Sign-in</a>
                     </li>
-                @endif
 
+                @endif
             </ul>
         </div>
     </div>

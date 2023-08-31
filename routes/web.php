@@ -1,9 +1,8 @@
 <?php
 
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Admin\AdminProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,7 +36,21 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/auth/google', [LoginController::class, 'redirectToGoogle']);
 Route::get('/auth/google/callback', [LoginController::class, 'handleGoogleCallback']);
 
-Route::get('/admin', [AdminController::class, 'productFormShow'])->name('product.form.show');
-Route::post('/admin', [AdminController::class, 'productFormSave'])->name('product.form.save');
 
-Route::get('/products', [ProductController::class, 'show'])->name('products');
+Route::group(['prefix' => '/admin'], function () {
+    Route::get('/', function () {
+        return view('admin.admin');
+    });
+    Route::group(['prefix' => '/products'], function () {
+        Route::get('/', [AdminProductController::class, 'index'])->name('admin.products.index');
+
+        Route::get('/create', [AdminProductController::class, 'create'])->name('admin.products.create');
+        Route::post('/', [AdminProductController::class, 'store'])->name('admin.products.store');
+
+        Route::get('/{productId}/edit', [AdminProductController::class, 'edit'])->name('admin.products.edit');
+        Route::post('/{productId}', [AdminProductController::class, 'update'])->name('admin.products.update');
+
+        Route::get('/{productId}', [AdminProductController::class, 'destroy'])->name('admin.products.destroy');
+    });
+});
+

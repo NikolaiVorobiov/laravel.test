@@ -17,7 +17,7 @@ class CheckAuth
     {
 
         if ($request->session()->has('admin')) {
-            return redirect()->route('admin');
+            return redirect()->route('admin.products.index');
         }
 
         return $next($request);

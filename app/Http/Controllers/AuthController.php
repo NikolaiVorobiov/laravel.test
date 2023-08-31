@@ -14,12 +14,9 @@ class AuthController extends Controller
         return redirect()->route('home');
     }
 
-
     public function loginForm(Request $request)
     {
-        if (!$request->has('email') && !$request->has('password')) {
             return view('sign-in', ['info' => '']);
-        }
     }
 
     public function loginSave(Request $request)
@@ -46,12 +43,9 @@ class AuthController extends Controller
         }
     }
 
-
     public function registerForm(Request $request)
     {
-        if (empty($request->email) && empty($request->password) && empty($request->first_name) && empty($request->last_name)) {
             return view('sign-up');
-        }
     }
 
     public function registerSave(Request $request)
@@ -82,6 +76,6 @@ class AuthController extends Controller
             $user->last_name = $validated['last_name'];
             $user->save();
 
-            return view('admin');
+            return view('admin.admin');
     }
 }

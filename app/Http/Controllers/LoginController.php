@@ -41,6 +41,6 @@ class LoginController extends Controller
         );
 
         $request->session()->put('admin', true);
-        return view('admin');
+        return view('admin.admin');
     }
 }
