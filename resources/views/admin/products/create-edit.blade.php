@@ -18,6 +18,7 @@
 
     <form method="post" action="{{ !isset($product) ? route('admin.products.store') : route('admin.products.update', ['productId' => $product->id]) }}" enctype="multipart/form-data">
 
+        @method('PUT')
         @csrf
 
         <input value="{{ isset($product) ? $product->id : '' }}" type="hidden" name="id" >

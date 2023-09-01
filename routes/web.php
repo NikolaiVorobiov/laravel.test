@@ -51,7 +51,7 @@ Route::group(['prefix' => '/admin'], function () {
         Route::post('/', [AdminProductController::class, 'store'])->name('admin.products.store');
 
         Route::get('/{productId}/edit', [AdminProductController::class, 'edit'])->name('admin.products.edit');
-        Route::post('/{productId}', [AdminProductController::class, 'update'])->name('admin.products.update');
+        Route::put('/{productId}', [AdminProductController::class, 'update'])->name('admin.products.update');
 
         Route::get('/{productId}', [AdminProductController::class, 'destroy'])->name('admin.products.destroy');
     });
