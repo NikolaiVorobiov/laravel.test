@@ -19,5 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/v1/products', [ApiProductController::class, 'index'])->name('api.v1.products');;
-Route::get('/v1/brands', [ApiBrandController::class, 'index'])->name('api.v1.brands');;
+Route::group(['middleware' => ['api.check.auth']],  function () {
+    Route::get('/v1/products', [ApiProductController::class, 'index'])->name('api.v1.products');;
+    Route::get('/v1/brands', [ApiBrandController::class, 'index'])->name('api.v1.brands');
+});
