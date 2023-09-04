@@ -32,10 +32,10 @@
 
         <hr>
 
-        <div style="width: 30px; height: 30px">
-            <a href="{{ url('auth/google') }}" class="google-btn">
-                <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
-                <span style="color: black;">Login with Google</span>
+        <div>
+            <a href="{{ url('auth/google') }}">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google"/>
+                <span>Sign-in with Google</span>
             </a>
         </div>
     </form>
