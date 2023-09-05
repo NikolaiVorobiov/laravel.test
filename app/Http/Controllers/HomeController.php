@@ -45,8 +45,6 @@ class HomeController extends Controller
     {
         $orders = $request->session()->get('orders');
 
-        dump(count($orders));
-
         if (count($orders) == 0) {
             return redirect()->route('home.products');
         }
