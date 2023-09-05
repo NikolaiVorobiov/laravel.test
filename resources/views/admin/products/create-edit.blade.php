@@ -18,7 +18,10 @@
 
     <form method="post" action="{{ !isset($product) ? route('admin.products.store') : route('admin.products.update', ['productId' => $product->id]) }}" enctype="multipart/form-data">
 
-        @method('PUT')
+        @if(isset($product))
+            @method('PUT')
+        @endif
+
         @csrf
 
         <input value="{{ isset($product) ? $product->id : '' }}" type="hidden" name="id" >
@@ -47,14 +50,15 @@
         </div>
 
         <div class="mb-3">
-            <label for="dollar" class="form-label">Dollar $</label>
-            <input type="radio" name="currency"  value="Dollar" id="dollar"  {{ ((old('currency') === 'Dollar') || ((isset($product)) && ($product->currency === 'Dollar'))) ? 'checked' : '' }}>
+{{--            <label for="dollar" class="form-label">Dollar</label>--}}
+{{--            <input type="radio" name="currency"  value="Dollar" id="dollar"  {{ ((old('currency') === 'Dollar') || ((isset($product)) && ($product->currency === 'Dollar'))) ? 'checked' : '' }}>--}}
 
-            <label for="euro" class="form-label">Euro </label>
-            <input type="radio" name="currency" value="Euro" id="euro"  {{ ((old('currency') === 'Euro') || ((isset($product)) && ($product->currency === 'Euro'))) ? 'checked' : '' }}>
+{{--            <label for="euro" class="form-label">Euro</label>--}}
+{{--            <input type="radio" name="currency" value="Euro" id="euro"  {{ ((old('currency') === 'Euro') || ((isset($product)) && ($product->currency === 'Euro'))) ? 'checked' : '' }}>--}}
 
-            <label for="grivna" class="form-label">Grivna </label>
-            <input type="radio" name="currency" value="Grivna" id="grivna" {{ ((old('currency') === 'Grivna') || ((isset($product)) && ($product->currency === 'Grivna'))) ? 'checked' : '' }}>
+            <label for="grivna" class="form-label">Grivna</label>
+{{--            <input type="radio" name="currency" value="Grivna" id="grivna" {{ ((old('currency') === 'Grivna') || ((isset($product)) && ($product->currency === 'Grivna'))) ? 'checked' : '' }}>--}}
+            <input type="radio" name="currency" value="Grivna" id="grivna" checked }}>
         </div>
 
         <div class="mb-3">

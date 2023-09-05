@@ -22,7 +22,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');;
+Route::group(['prefix' => '/home/products'], function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home.products');
+    Route::get('/{productId}/addtocart', [HomeController::class, 'addToCart'])->name('home.products.addToCart');
+    Route::get('/{productId}/destroy', [HomeController::class, 'destroy'])->name('home.products.destroy');
+    Route::get('/showcart', [HomeController::class, 'showCart'])->name('home.products.show.cart');
+    Route::get('/clearcart', [HomeController::class, 'clearcart'])->name('home.products.clear.cart');
+});
 
 Route::group(['middleware' => ['check.auth']],  function () {
     Route::get('/sign-up', [AuthController::class, 'registerForm'])->name('register.form');

@@ -2,6 +2,16 @@
     <x-slot:title>Home</x-slot:title>
     <h1>Home</h1>
 
+    @if( $cart && $countOrder > 0)
+        <a href="{{ route('home.products.show.cart') }}">
+            <span>CART ({{ $countOrder }})</span>
+        </a>
+        <br>
+        <a href="{{ route('home.products.clear.cart') }}">
+            <span>Clear cart</span>
+        </a>
+    @endif
+
     <div class="container text-center">
         <div class="row row-cols-6">
 
@@ -12,11 +22,13 @@
                     @else
                         <td><br><br>No image</td><br><br><br><br>
                     @endif
+                        <p>ID: {{ $product->id }}</p>
                         <p>Name: {{ $product->name }}</p>
                         <p>Brand: {{ $product->brand }}</p>
                         <p>Price: {{ $product->price }}</p>
                         <p>Currency: {{ $product->currency }}</p>
                         <p>Status: {{ $product->status }}</p>
+                        <a href="{{ route('home.products.addToCart', ['productId' => $product->id]) }}">Add to cart</a>
                 </div>
             @endforeach
 

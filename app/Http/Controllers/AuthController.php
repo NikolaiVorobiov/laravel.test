@@ -11,7 +11,7 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         $request->session()->flush();
-        return redirect()->route('home');
+        return redirect()->route('home.products');
     }
 
     public function loginForm(Request $request)
