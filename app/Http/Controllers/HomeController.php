@@ -23,12 +23,13 @@ class HomeController extends Controller
         ]);
     }
 
+
     public function addToCart(Request $request, $productId)
     {
         $product = Product::find($productId);
         $order = ['productId' => $productId, 'price' => $product->price];
 
-        if ($request->session()->has('orders')) {;
+        if ($request->session()->has('orders')) {
             $orders = $request->session()->get('orders');
         } else {
             $orders = [];
@@ -40,6 +41,7 @@ class HomeController extends Controller
 
         return redirect()->back()->withInput();
     }
+
 
     public function showCart(Request $request)
     {
@@ -56,13 +58,26 @@ class HomeController extends Controller
             $totalPrice += $order['price'];
         };
 
-        $orderedProducts = Product::query()->find($ids);
+        $countOfIds = array_count_values($ids);
 
+        $updatedOrders = [];
+        foreach ($countOfIds as $id => $quantity) {
+            $price = 0;
+            foreach ($orders as $order) {
+                if ($order['productId'] == $id) {
+                    $price = $order['price'];
+                }
+            }
+
+            $updatedOrders[] = ['productId' => $id, 'price' => $price ,'quantity' => $quantity];
+        }
+
+        $orderedProducts = Product::query()->find($ids);
 
         return view('cart', [
             'orderedProducts' => $orderedProducts,
             'totalPrice' => $totalPrice,
-            'orders' => $orders,
+            'orders' => $updatedOrders,
         ]);
     }
 
