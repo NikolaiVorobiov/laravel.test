@@ -2,6 +2,11 @@
     <x-slot:title>Cart</x-slot:title>
 
     <h1>Cart</h1>
+
+    <a href="{{ route('home.products.pay') }}" style="padding-left: 30px;">
+        <span>Pay</span>
+    </a>
+
     <a href="{{ route('home.products.clear.cart') }}" style="display: block; text-align: right; padding-right: 150px;">
         <span>Clear cart</span>
     </a>
@@ -35,6 +40,7 @@
                     <td>No image</td>
                 @endif
 
+{{--                TODO move to controller--}}
                @foreach( $orders as $order )
                    @if( $order['productId'] == $product->id )
                       <td> {{ $order['price'] }} </td>

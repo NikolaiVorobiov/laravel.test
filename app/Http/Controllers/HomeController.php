@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -47,7 +48,7 @@ class HomeController extends Controller
     {
         $orders = $request->session()->get('orders');
 
-        if (count($orders) == 0) {
+        if (!isset($orders) || count($orders) == 0) {
             return redirect()->route('home.products');
         }
 
@@ -57,6 +58,7 @@ class HomeController extends Controller
             $ids[] = $order['productId'];
             $totalPrice += $order['price'];
         };
+        $request->session()->put('totalPrice', $totalPrice);
 
         $countOfIds = array_count_values($ids);
 
@@ -99,5 +101,47 @@ class HomeController extends Controller
         }
         $request->session()->put('orders', $orders);
         return redirect()->route('home.products.show.cart');
+    }
+
+
+    public function emailForm()
+    {
+        return view('email');
+    }
+
+    public function emailSave(Request $request)
+    {
+        $request->session()->put('currentUserEmail', $request->email);
+
+        return redirect()->route('home.products.pay');
+    }
+
+
+    public function pay(Request $request)
+    {
+        $totalPrice = $request->session()->get('totalPrice');
+        $currentUserEmail = $request->session()->get('currentUserEmail');
+        $orderedProducts = $request->session()->get('orders');
+
+        if (!$currentUserEmail) {
+            return redirect()->route('email.form');
+        }
+
+        $orderToPay = [
+                'email' => $currentUserEmail,
+                'totalPrice' => $totalPrice,
+                'currency' => 'Grivna',
+                'products' =>$orderedProducts
+        ];
+
+        Order::create($orderToPay);
+
+        $request->session()->forget('totalPrice');
+        $request->session()->forget('orders');
+
+                                        //TODO Send mail
+
+        return redirect()->route('home.products');
+
     }
 }

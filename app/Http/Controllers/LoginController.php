@@ -41,6 +41,7 @@ class LoginController extends Controller
         );
 
         $request->session()->put('admin', true);
+        $request->session()->put('currentUserEmail', $googleUser->user['email']);
         return view('admin.admin');
     }
 }

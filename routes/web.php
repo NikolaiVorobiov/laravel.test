@@ -24,6 +24,9 @@ Route::get('/', function () {
 
 Route::group(['prefix' => '/home/products'], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home.products');
+    Route::get('/enteremail', [HomeController::class, 'emailForm'])->name('email.form');
+    Route::post('/enteremail', [HomeController::class, 'emailSave'])->name('email.save');
+    Route::get('/pay', [HomeController::class, 'pay'])->name('home.products.pay');
     Route::get('/{productId}/addtocart', [HomeController::class, 'addToCart'])->name('home.products.addToCart');
     Route::get('/{productId}/destroy', [HomeController::class, 'destroy'])->name('home.products.destroy');
     Route::get('/showcart', [HomeController::class, 'showCart'])->name('home.products.show.cart');
@@ -47,7 +50,8 @@ Route::group(['prefix' => '/admin'], function () {
 
     Route::get('/', function () {
         return view('admin.admin');
-    });
+    })->name('admin');
+
     Route::get('/brands',  [BrandController::class, 'index'])->name('admin.brands.index');
 
     Route::group(['prefix' => '/products'], function () {
