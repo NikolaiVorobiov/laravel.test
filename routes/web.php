@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MailController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -68,4 +69,6 @@ Route::group(['prefix' => '/admin'], function () {
         Route::get('/{productId}', [AdminProductController::class, 'destroy'])->name('admin.products.destroy');
     });
 });
+
+Route::get('/send-mail/{currentUserEmail}', [MailController::class, 'index'])->name('send.mail');
 

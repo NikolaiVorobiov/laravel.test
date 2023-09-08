@@ -12,6 +12,10 @@
         </a>
     @endif
 
+    @if(isset($info))
+        <div style="color: red;">{{ $info }}</div>
+    @endif
+
     <div class="container text-center">
         <div class="row row-cols-6">
 

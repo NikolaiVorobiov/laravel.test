@@ -17,10 +17,14 @@ class HomeController extends Controller
             $countOrder = count($request->session()->get('orders'));
         }
 
+        $info = $request->session()->get('info') ?? '';
+        $request->session()->forget('info');
+
         return view('home', [
             'products' => $products,
             'cart' => $request->session()->has('cart'),
-            'countOrder' => $countOrder
+            'countOrder' => $countOrder,
+            'info' => $info
         ]);
     }
 
@@ -141,7 +145,8 @@ class HomeController extends Controller
 
                                         //TODO Send mail
 
-        return redirect()->route('home.products');
+
+        return redirect()->route('send.mail', ['currentUserEmail' => $currentUserEmail]);
 
     }
 }
