@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminProductController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
@@ -53,6 +54,7 @@ Route::group(['prefix' => '/admin'], function () {
     })->name('admin');
 
     Route::get('/brands',  [BrandController::class, 'index'])->name('admin.brands.index');
+    Route::get('/orders',  [OrderController::class, 'index'])->name('admin.orders.index');
 
     Route::group(['prefix' => '/products'], function () {
         Route::get('/', [AdminProductController::class, 'index'])->name('admin.products.index');
