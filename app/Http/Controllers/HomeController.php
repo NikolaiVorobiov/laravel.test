@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Currency;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -134,7 +135,7 @@ class HomeController extends Controller
         $orderToPay = [
                 'email' => $currentUserEmail,
                 'totalPrice' => $totalPrice,
-                'currency' => 'Grivna',
+                'currency' => Currency::NAME_GRIVNA,
                 'products' =>$orderedProducts
         ];
 
