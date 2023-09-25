@@ -30,7 +30,7 @@ class HomeController extends Controller
     }
 
 
-    public function addToCart(Request $request, $productId)
+    public function addToCart(Request $request, int $productId): \Illuminate\Http\JsonResponse
     {
         $product = Product::find($productId);
         $order = ['productId' => $productId, 'price' => $product->price];
@@ -45,7 +45,8 @@ class HomeController extends Controller
         $orders[] = $order;
         $request->session()->put('orders', $orders);
 
-        return redirect()->back()->withInput();
+//        return redirect()->back()->withInput();
+        return response()->json(['message' => 'ok']);
     }
 
 
@@ -143,9 +144,6 @@ class HomeController extends Controller
 
         $request->session()->forget('totalPrice');
         $request->session()->forget('orders');
-
-                                        //TODO Send mail
-
 
         return redirect()->route('send.mail', ['currentUserEmail' => $currentUserEmail]);
 
